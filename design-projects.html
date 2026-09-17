@@ -3,16 +3,18 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Anas Mahmud — Video Editing Projects</title>
+  <title>Anas Mahmud — Graphic Design Projects</title>
   <link rel="stylesheet" href="css/style.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet" />
 </head>
 <body>
+  <!-- AMBIENT GLOW ORBS -->
   <div class="glow-orb glow-orb--1" aria-hidden="true"></div>
   <div class="glow-orb glow-orb--2" aria-hidden="true"></div>
 
+  <!-- MINIMAL NAV FOR INNER PAGE -->
   <nav id="navbar" class="scrolled"><button class="nav-toggle" aria-label="Toggle menu"><span></span><span></span><span></span></button>
     <a href="index.html" class="nav-logo">AM</a>
     <ul class="nav-links">
@@ -25,15 +27,18 @@
     </ul>
   </nav>
 
+  <!-- PROJECTS GRID SECTION -->
   <section id="all-projects" style="padding-top: 150px;">
-    <div class="section-label">Video Editing</div>
+    <div class="section-label">Graphic Design</div>
     <h1 class="section-title">All Projects</h1>
     
-    <div class="filter-container" id="video-filters"></div>
+    <div class="filter-container" id="design-filters"></div>
     
-    <div class="projects-grid" id="video-grid"></div>
+    <!-- Populated by main.js reading config.js -->
+    <div class="projects-grid" id="design-grid"></div>
   </section>
 
+  <!-- FOOTER -->
   <footer id="footer">
     <div class="footer-inner">
       <p class="footer-copy">&copy; <span id="year"></span> Anas Mahmud. All rights reserved.</p>
