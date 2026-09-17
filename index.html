@@ -1,0 +1,184 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sabbir Adnan — Portfolio</title>
+  <link rel="stylesheet" href="css/style.css"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet"/>
+</head>
+<body>
+
+  <!-- CUSTOM CURSOR -->
+  <div class="cursor-dot" aria-hidden="true"></div>
+  <div class="cursor-outline" aria-hidden="true"></div>
+
+  <!-- NOISE TEXTURE OVERLAY -->
+  <div class="noise-bg" aria-hidden="true"></div>
+
+  <!-- AMBIENT GLOW ORBS -->
+  <div class="glow-orb glow-orb--1" aria-hidden="true"></div>
+  <div class="glow-orb glow-orb--2" aria-hidden="true"></div>
+
+  <!-- ═══════════ NAV ═══════════ -->
+  <nav id="navbar">
+    <!-- Logo: image with SA text fallback -->
+    <a href="#hero" class="nav-logo" id="nav-logo-link">
+      <img id="nav-logo-img" src="assets/images/logo.png" alt="Sabbir Adnan" height="40"
+           onerror="this.style.display='none'; document.getElementById('nav-logo-txt').style.display='block'"/>
+      <span id="nav-logo-txt" style="display:none">SA</span>
+    </a>
+    <button class="nav-toggle" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#video-section">Video</a></li>
+      <li><a href="#design-section">Design</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#skill-proof">Channels</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- ═══════════ HERO ═══════════ -->
+  <section id="hero">
+    <div class="hero-video-wrap">
+      <video id="hero-video" autoplay muted loop playsinline preload="metadata" poster="assets/images/proj-1.jpg">
+        <source src="assets/videos/hero-bg.mp4" type="video/mp4"/>
+      </video>
+      <div class="hero-overlay"></div>
+    </div>
+    <div class="hero-content">
+      <h1 class="hero-name lando-entrance">Loading...</h1>
+      <div class="hero-divider lando-entrance-delay"></div>
+      <p class="hero-tagline lando-entrance-delay-2">...</p>
+    </div>
+  </section>
+
+  <!-- ═══════════ ABOUT ═══════════ -->
+  <section id="about" class="section-bg-2">
+    <div class="about-grid">
+      <div class="about-photo-wrap reveal-up">
+        <img src="assets/images/about-photo.jpg" alt="Sabbir Adnan" class="about-photo" loading="lazy"/>
+        <div class="watermark-overlay"></div>
+      </div>
+      <div class="about-text reveal-up">
+        <h2 class="section-title">About Me<span class="draw-line"></span></h2>
+        <!-- EDIT BIO TEXT IN config.js → bio field -->
+        <p class="about-bio" id="about-bio">Loading bio...</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ VIDEO EDITING ═══════════ -->
+  <section id="video-section" class="gallery-section section-bg-1">
+    <div class="section-header">
+      <h2 class="section-title slide-in-left">VIDEO EDITING
+        <span class="draw-line"></span>
+      </h2>
+    </div>
+    <div class="carousel-wrapper reveal-up">
+      <button class="carousel-arrow arrow-prev" aria-label="Previous">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+      <button class="carousel-arrow arrow-next" aria-label="Next">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
+      <div class="carousel-container" id="video-carousel"></div>
+    </div>
+    <div class="cta-wrap reveal-up">
+      <a href="https://youtube.com/@sabbiradnan-ym7xw" target="_blank" rel="noopener" class="neon-btn">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33 2.78 2.78 0 0 0 1.94 2c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.33 29 29 0 0 0-.46-5.33z"/><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02" fill="var(--bg-deep)"/></svg>
+        Watch My Work on YouTube
+      </a>
+    </div>
+  </section>
+
+  <!-- ═══════════ GRAPHIC DESIGN ═══════════ -->
+  <section id="design-section" class="gallery-section section-bg-2">
+    <div class="section-divider"></div>
+    <div class="section-header">
+      <h2 class="section-title slide-in-left">GRAPHIC DESIGN
+        <span class="draw-line"></span>
+      </h2>
+    </div>
+    <div class="carousel-wrapper reveal-up">
+      <button class="carousel-arrow arrow-prev" aria-label="Previous">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+      <button class="carousel-arrow arrow-next" aria-label="Next">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
+      <div class="carousel-container" id="design-carousel"></div>
+    </div>
+    <div class="cta-wrap reveal-up">
+      <a href="https://www.behance.net/sabbiradnan96" target="_blank" rel="noopener" class="neon-btn">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M22 7h-7v-2h7v2zm1.726 10c-.442 1.297-2.029 3-5.101 3-3.074 0-5.564-1.729-5.564-5.675 0-3.91 2.325-5.92 5.466-5.92 3.082 0 4.964 1.782 5.375 4.426.078.506.109 1.188.095 2.14h-8.027c.13 3.211 3.483 3.312 4.588 2.029h3.168zm-7.686-4h4.965c-.105-1.547-1.136-2.219-2.477-2.219-1.466 0-2.277.768-2.488 2.219zm-9.574 6.988h-6.466v-14.967h6.953c5.476.081 5.58 5.444 2.72 6.906 3.461 1.26 3.577 8.061-3.207 8.061zm-3.466-8.988h3.584c2.508 0 2.906-3-.312-3h-3.272v3zm3.391 3h-3.391v3.016h3.341c3.055 0 2.868-3.016.05-3.016z"/></svg>
+        View My Designs on Behance
+      </a>
+    </div>
+  </section>
+
+  <!-- ═══════════ SERVICES (2 only) ═══════════ -->
+  <section id="services" class="section-bg-1">
+    <div class="section-header">
+      <h2 class="section-title slide-in-left">What I Offer
+        <span class="draw-line"></span>
+      </h2>
+    </div>
+    <div class="services-wrapper reveal-up">
+      <div class="services-grid services-2-col">
+        <div class="service-card">
+          <div class="service-icon">🎬</div>
+          <h3 class="service-name">Video Editing</h3>
+          <p class="service-desc">From raw footage to cinematic sequences — motion, storytelling, reels and more.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">🎨</div>
+          <h3 class="service-name">Graphic Design</h3>
+          <p class="service-desc">Posters, thumbnails, calligraphy and social media visuals that stand out.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ SKILL PROOF ═══════════ -->
+  <section id="skill-proof" class="section-bg-2">
+    <div class="section-header center-header">
+      <h2 class="section-title slide-in-left">Skill Proof & Channel Links
+        <span class="draw-line"></span>
+      </h2>
+      <p class="section-subtitle">Live channels, portfolio hubs, and drive folders showcasing video cuts, graphic files, and creative updates.</p>
+    </div>
+    <!-- Populated by JS from config.skillLinks -->
+    <div class="skill-proof-grid reveal-up" id="skill-grid"></div>
+  </section>
+
+  <!-- ═══════════ CONTACT ═══════════ -->
+  <section id="contact" class="section-bg-1">
+    <div class="contact-glow" aria-hidden="true"></div>
+    <div class="section-header center-header">
+      <h2 class="section-title contact-heading slide-in-left">Get In Touch
+        <span class="draw-line"></span>
+      </h2>
+      <p class="section-subtitle reveal-up">Open to projects, collaborations and creative opportunities.</p>
+    </div>
+    <!-- Populated by JS from config.contactLinks -->
+    <div class="contact-cards reveal-up" id="contact-grid"></div>
+  </section>
+
+  <!-- ═══════════ FOOTER ═══════════ -->
+  <footer id="footer">
+    <div class="footer-inner">
+      <p class="footer-copy">&copy; <span id="year"></span> Sabbir Adnan. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="js/config.js" defer></script>
+  <script src="js/main.js" defer></script>
+</body>
+</html>
+
