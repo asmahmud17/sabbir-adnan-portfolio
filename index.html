@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8"/>
@@ -35,7 +35,7 @@
 /* ── GLOBAL RESET + SMOOTH FONT ── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; font-size: 16px; cursor: none; overflow-x: hidden; }
-body {
+body { -webkit-overflow-scrolling: touch;
   background: var(--bg-deep);
   color: var(--text-sec);
   font-family: var(--f-body);
@@ -47,7 +47,9 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-a, button, .carousel-container { cursor: none !important; }
+a, button, .carousel-container { display: flex; overflow-x: scroll; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; scroll-behavior: smooth; gap: 20px; padding: 20px 0; scrollbar-width: none; -ms-overflow-style: none; cursor: default; }
+.carousel-container::-webkit-scrollbar { display: none; }
+.gallery-card { scroll-snap-align: start; flex-shrink: 0; }
 
 /* ── CUSTOM CURSOR ── */
 .cursor-dot { position: fixed; top: 0; left: 0; width: 6px; height: 6px; background: #fff; border-radius: 50%; pointer-events: none; z-index: 10000; will-change: transform; }
@@ -226,7 +228,9 @@ section { padding: clamp(4rem,10vw,8rem) clamp(1.5rem,5vw,6rem); position: relat
 .gallery-section { padding-bottom: clamp(4rem,8vw,6rem); }
 .carousel-wrapper { position: relative; margin: 0 -1.5rem; padding: 1rem 1.5rem 3rem; }
 @media(min-width:768px){ .carousel-wrapper { margin: 0 -2rem; padding: 1rem 2rem 3rem; } }
-.carousel-container { display: flex; gap: 2rem; overflow-x: auto; padding: 2rem 0; align-items: center; scroll-snap-type: x mandatory; scrollbar-width: none; }
+.carousel-container { display: flex; overflow-x: scroll; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; scroll-behavior: smooth; gap: 20px; padding: 20px 0; scrollbar-width: none; -ms-overflow-style: none; cursor: default; }
+.carousel-container::-webkit-scrollbar { display: none; }
+.gallery-card { scroll-snap-align: start; flex-shrink: 0; }
 .carousel-container::-webkit-scrollbar { display: none; }
 
 .carousel-arrow { position: absolute; top: 50%; transform: translateY(-50%); z-index: 10; width: 44px; height: 44px; border-radius: 50%; background: rgba(18,1,28,.8); border: 1px solid rgba(181,26,255,.4); color: #fff; display: flex; align-items: center; justify-content: center; transition: all .3s; backdrop-filter: blur(5px); pointer-events: auto; }
@@ -235,7 +239,7 @@ section { padding: clamp(4rem,10vw,8rem) clamp(1.5rem,5vw,6rem); position: relat
 @media (max-width:768px){ .carousel-arrow { display: none !important; } }
 
 /* ── CARDS ── */
-.card-hover-fx { position: relative; border-radius: 12px; overflow: hidden; border: 1px solid rgba(181,26,255,.1); background: var(--bg-dark); transition: transform .4s ease, border-color .3s, box-shadow .3s, opacity .4s; flex: 0 0 auto; scroll-snap-align: center; opacity: .6; transform: scale(.9); will-change: transform,opacity; }
+.card-hover-fx { -webkit-transform: translateZ(0); transform: translateZ(0); will-change: transform; backface-visibility: hidden;  position: relative; border-radius: 12px; overflow: hidden; border: 1px solid rgba(181,26,255,.1); background: var(--bg-dark); transition: transform .4s ease, border-color .3s, box-shadow .3s, opacity .4s; flex: 0 0 auto; scroll-snap-align: start; opacity: .6; transform: scale(.9); will-change: transform,opacity; }
 .card-hover-fx:hover, .card-hover-fx.focused { opacity: 1; transform: scale(1) translateY(-6px); border-color: rgba(181,26,255,.5); box-shadow: 0 15px 35px rgba(139,0,199,.25); }
 .video-card  { width: clamp(280px,75vw,650px); aspect-ratio: 16/10; }
 .design-card { width: clamp(240px,60vw,450px); aspect-ratio: 4/5; }
@@ -466,6 +470,8 @@ a.proof-card:hover { border-color: var(--accent); background: rgba(58,1,85,.5); 
   }
 }
 
+
+@media (max-width: 768px) { * { animation-duration: 0.1ms !important; transition-duration: 0.3s !important; } }
 </style>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
@@ -508,8 +514,8 @@ a.proof-card:hover { border-color: var(--accent); background: rgba(58,1,85,.5); 
   <!-- ═══════════ HERO ═══════════ -->
   <section id="hero">
     <div class="hero-video-wrap">
-      <video id="hero-video" autoplay muted loop playsinline preload="metadata" poster="assets/images/proj-1.jpg">
-        <source src="assets/videos/hero-bg.mp4" type="video/mp4"/>
+      <video id="hero-video" autoplay muted loop playsinline preload="metadata" poster="assets/images/hero-poster.jpg">
+        <source src="assets/videos/hero-reel.mp4" type="video/mp4"/>
       </video>
       <div class="hero-overlay"></div>
     </div>
@@ -991,54 +997,7 @@ document.addEventListener('DOMContentLoaded', () => {
         container.addEventListener('scroll', () => { clearTimeout(ft); ft = setTimeout(focus, 60); }, {passive:true});
         setTimeout(focus, 600);
 
-        // Mouse drag
-        container.addEventListener('mousedown', e => {
-            if (e.target.closest('a,button')) return;
-            isDown = true;
-            document.body.classList.add('cursor-hover');
-            startX = e.pageX - container.offsetLeft;
-            scrollLeft = container.scrollLeft;
-            cancelAnimationFrame(mid);
-        });
-        window.addEventListener('mouseup', () => {
-            if (!isDown) return;
-            isDown = false;
-            document.body.classList.remove('cursor-hover');
-            momentum();
-        });
-        container.addEventListener('mousemove', e => {
-            if (!isDown) return;
-            e.preventDefault();
-            const dx = (e.pageX - container.offsetLeft - startX) * 1.5;
-            const prev = container.scrollLeft;
-            container.scrollLeft = scrollLeft - dx;
-            velX = container.scrollLeft - prev;
-            focus();
-        });
-
-        // Touch swipe
-        container.addEventListener('touchstart', e => {
-            if (e.target.closest('a,button')) return;
-            isDown = true;
-            startX = e.touches[0].pageX - container.offsetLeft;
-            scrollLeft = container.scrollLeft;
-            cancelAnimationFrame(mid);
-        }, {passive:true});
-        container.addEventListener('touchend', () => { if(isDown){isDown=false; momentum();} });
-        container.addEventListener('touchmove', e => {
-            if (!isDown) return;
-            const dx = (e.touches[0].pageX - container.offsetLeft - startX) * 1.5;
-            const prev = container.scrollLeft;
-            container.scrollLeft = scrollLeft - dx;
-            velX = container.scrollLeft - prev;
-            focus();
-        }, {passive:true});
-
-        // Wheel
-        container.addEventListener('wheel', e => {
-            if (e.deltaY && Math.abs(e.deltaX) < 10) { e.preventDefault(); container.scrollLeft += e.deltaY * 1.5; }
-        }, {passive:false});
-
+        // Native CSS scroll is used instead of JS dragging
         function momentum() {
             container.scrollLeft += velX;
             velX *= 0.92;
@@ -1066,5 +1025,7 @@ document.addEventListener('DOMContentLoaded', () => {
 </script>
 </body>
 </html>
+
+
 
 
