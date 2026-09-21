@@ -36,7 +36,6 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; font-size: 16px; cursor: none; overflow-x: hidden; }
 body { -webkit-overflow-scrolling: touch;
-  overscroll-behavior: none;
   background: var(--bg-deep);
   color: var(--text-sec);
   font-family: var(--f-body);
@@ -48,18 +47,7 @@ body { -webkit-overflow-scrolling: touch;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-.carousel-container {
-  display: flex;
-  overflow-x: scroll;
-  scroll-snap-type: x mandatory;
-  -webkit-overflow-scrolling: touch;
-  scroll-behavior: smooth;
-  gap: 20px;
-  padding: 20px 0;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-  cursor: default;
-}
+a, button, .carousel-container { display: flex; overflow-x: scroll; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; scroll-behavior: smooth; gap: 20px; padding: 20px 0; scrollbar-width: none; -ms-overflow-style: none; cursor: default; }
 .carousel-container::-webkit-scrollbar { display: none; }
 .gallery-card { scroll-snap-align: start; flex-shrink: 0; }
 
@@ -156,7 +144,7 @@ section { padding: clamp(4rem,10vw,8rem) clamp(1.5rem,5vw,6rem); position: relat
 
 /* Nav links: Inter, 12px, 500, uppercase, wide */
 .nav-links { display: flex; gap: 2.5rem; list-style: none; }
-.nav-links a { text-decoration: none !important;
+.nav-links a {
   font-family: var(--f-body);
   font-size: 12px;
   font-weight: 500;
@@ -167,17 +155,14 @@ section { padding: clamp(4rem,10vw,8rem) clamp(1.5rem,5vw,6rem); position: relat
   color: var(--text);
   pointer-events: auto;
 }
-.nav-links a::after { display: none; }
-.nav-links a { text-decoration: none !important; }
-.nav-links a:hover { text-decoration: none !important; }
-.nav-links li { text-decoration: none !important; }
+.nav-links a::after { content:''; position: absolute; bottom: 0; left: 0; width: 100%; height: 1px; background: var(--accent); transform: scaleX(0); transform-origin: right; transition: transform .3s ease; }
 .nav-links a:hover::after { transform: scaleX(1); transform-origin: left; }
 
 @media (max-width: 768px) {
   .nav-toggle { display: flex; }
   .nav-links { position: fixed; top: 0; right: 0; width: 100%; max-width: 300px; height: 100vh; background: rgba(18,1,28,0.98); backdrop-filter: blur(15px); flex-direction: column; align-items: flex-start; justify-content: center; padding: 2rem; gap: 2rem; transform: translateX(100%); transition: transform .4s var(--ease); border-left: 1px solid rgba(181,26,255,0.1); z-index: 1001; }
   .nav-links.open { transform: translateX(0); }
-  .nav-links a { text-decoration: none !important; font-size: 16px; padding: 1rem 0; width: 100%; display: block; }
+  .nav-links a { font-size: 16px; padding: 1rem 0; width: 100%; display: block; }
 }
 
 /* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
@@ -486,61 +471,7 @@ a.proof-card:hover { border-color: var(--accent); background: rgba(58,1,85,.5); 
 }
 
 
-
-/* ── MOBILE PERFORMANCE FIXES ── */
-@media (max-width: 768px) {
-  /* Disable heavy animations on mobile */
-  .glow-orb { display: none !important; }
-  .noise-bg { display: none !important; }
-  
-  /* Smooth carousel on mobile */
-  .carousel-container {
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-    overscroll-behavior-x: contain;
-    scroll-behavior: smooth;
-  }
-  
-  /* GPU accelerate all animated elements */
-  .card-hover-fx,
-  .gallery-card,
-  .reveal-up,
-  .slide-in-left,
-  .lando-entrance,
-  .service-card,
-  .proof-card,
-  .contact-card {
-    -webkit-transform: translateZ(0);
-    transform: translateZ(0);
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
-    will-change: transform, opacity;
-  }
-
-  /* Disable hover effects on mobile (touch) */
-  .card-hover-fx:hover {
-    transform: scale(1) !important;
-    opacity: 1 !important;
-  }
-
-  /* Simpler transitions on mobile */
-  .card-hover-fx {
-    transition: opacity 0.3s ease !important;
-    opacity: 0.85;
-  }
-  .card-hover-fx.focused {
-    opacity: 1;
-    transform: scale(1) !important;
-  }
-
-  /* Faster reveal animations on mobile */
-  .reveal-up {
-    transition: opacity 0.5s ease, transform 0.5s ease !important;
-  }
-  .slide-in-left {
-    transition: opacity 0.5s ease, transform 0.5s ease !important;
-  }
-}
+@media (max-width: 768px) { * { animation-duration: 0.1ms !important; transition-duration: 0.3s !important; } }
 </style>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
@@ -584,7 +515,7 @@ a.proof-card:hover { border-color: var(--accent); background: rgba(58,1,85,.5); 
   <section id="hero">
     <div class="hero-video-wrap">
       <video autoplay muted loop playsinline style="position:absolute; top:0; left:0; width:100%; height:100%; object-fit:cover; z-index:0;">
-  <source src="assets/videos/hero-reel.mp4" type="video/mp4">
+  <source src="C:\Users\ASUS\Downloads\hero-reel.mp4.mp4" type="video/mp4">
 </video>
 <div style="position:absolute; inset:0; background:rgba(0,0,0,0.4); z-index:0;"></div>
       <div class="hero-overlay"></div>
@@ -1067,8 +998,13 @@ document.addEventListener('DOMContentLoaded', () => {
         container.addEventListener('scroll', () => { clearTimeout(ft); ft = setTimeout(focus, 60); }, {passive:true});
         setTimeout(focus, 600);
 
-        // Mobile: use native CSS scroll only
-    // Desktop: keep focus effect on scroll
+        // Native CSS scroll is used instead of JS dragging
+        function momentum() {
+            container.scrollLeft += velX;
+            velX *= 0.92;
+            focus();
+            if (Math.abs(velX) > 0.5) mid = requestAnimationFrame(momentum);
+        }
     }
     document.querySelectorAll('.carousel-wrapper').forEach(initCarousel);
 
