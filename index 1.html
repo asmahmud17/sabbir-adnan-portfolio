@@ -170,7 +170,7 @@ section { padding: clamp(4rem,10vw,8rem) clamp(1.5rem,5vw,6rem); position: relat
    â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 #hero { height: 100svh; display: flex; align-items: center; justify-content: center; padding: 0; position: relative; overflow: hidden; }
 .hero-video-wrap, .hero-overlay { position: absolute; inset: 0; z-index: 0; }
-.hero-overlay { background: linear-gradient(to bottom, rgba(18,1,28,.5), rgba(18,1,28,.95)); }
+.hero-overlay { background: linear-gradient(to bottom, rgba(18,1,28,.2), rgba(18,1,28,.65)); pointer-events: none; }
 .hero-content { position: relative; z-index: 1; text-align: center; padding: 0 1rem; width: 100%; }
 
 /* Name: Bebas Neue, giant, white */
@@ -522,7 +522,6 @@ a, a:hover, a:visited, a:active { text-decoration: none !important; }
     height: 100%;
     object-fit: cover;
     z-index: 0;
-    -webkit-playsinline: true;
   }
 }
 </style>
@@ -567,10 +566,18 @@ a, a:hover, a:visited, a:active { text-decoration: none !important; }
   <!-- â•â•â•â•â•â•â•â•â•â•â• HERO â•â•â•â•â•â•â•â•â•â•â• -->
   <section id="hero">
     <div class="hero-video-wrap">
-      <video autoplay muted loop playsinline -webkit-playsinline style="position:absolute; top:0; left:0; width:100%; height:100%; object-fit:cover; z-index:0;">
-  <source src="assets/videos/hero-reel.mp4" type="video/mp4">
-</video>
-<div style="position:absolute; inset:0; background:rgba(0,0,0,0.4); z-index:0;"></div>
+      <video 
+        id="hero-video"
+        autoplay 
+        muted 
+        loop 
+        playsinline
+        webkit-playsinline
+        preload="auto"
+        style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;z-index:0;pointer-events:none;">
+        <source src="assets/videos/hero-reel.mp4" type="video/mp4">
+      </video>
+      
       <div class="hero-overlay"></div>
     </div>
     <div class="hero-content" style="position: relative; z-index: 1;">
@@ -1101,6 +1108,48 @@ document.addEventListener('DOMContentLoaded', () => {
     if (yr) yr.textContent = new Date().getFullYear();
 });
 
+</script>
+
+<script>
+(function() {
+  var v = document.getElementById('hero-video');
+  if (!v) return;
+  
+  // Set all attributes properly via JS
+  v.muted = true;
+  v.loop = true;
+  v.autoplay = true;
+  v.setAttribute('playsinline', '');
+  v.setAttribute('webkit-playsinline', '');
+  v.setAttribute('x5-playsinline', '');
+  v.setAttribute('x5-video-player-type', 'h5');
+  v.setAttribute('x5-video-player-fullscreen', 'false');
+  
+  // Try to play
+  function tryPlay() {
+    v.muted = true;
+    var p = v.play();
+    if (p !== undefined) {
+      p.catch(function(e) {
+        console.log('Autoplay blocked, waiting for interaction');
+      });
+    }
+  }
+  
+  if (document.readyState === 'complete') {
+    tryPlay();
+  } else {
+    window.addEventListener('load', tryPlay);
+  }
+  
+  // Also try on any user interaction
+  ['touchstart','touchend','click','scroll'].forEach(function(evt) {
+    document.addEventListener(evt, function handler() {
+      tryPlay();
+      document.removeEventListener(evt, handler);
+    }, { once: true, passive: true });
+  });
+})();
 </script>
 </body>
 </html>
