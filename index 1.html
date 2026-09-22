@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8"/>
@@ -47,7 +47,7 @@ body { -webkit-overflow-scrolling: touch;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-.carousel-container { display: flex; overflow-x: scroll; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; scroll-behavior: smooth; gap: 20px; padding: 20px 0; scrollbar-width: none; -ms-overflow-style: none; cursor: default; }
+a, button, .carousel-container { display: flex; overflow-x: scroll; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; scroll-behavior: smooth; gap: 20px; padding: 20px 0; scrollbar-width: none; -ms-overflow-style: none; cursor: default; }
 .carousel-container::-webkit-scrollbar { display: none; }
 .gallery-card { scroll-snap-align: start; flex-shrink: 0; }
 
@@ -168,7 +168,7 @@ section { padding: clamp(4rem,10vw,8rem) clamp(1.5rem,5vw,6rem); position: relat
 /* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
    HERO
    â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
-#hero { height: 100svh; display: flex; align-items: center; justify-content: center; padding: 0; }
+#hero { height: 100svh; display: flex; align-items: center; justify-content: center; padding: 0; position: relative; overflow: hidden; }
 .hero-video-wrap, .hero-overlay { position: absolute; inset: 0; z-index: 0; }
 .hero-overlay { background: linear-gradient(to bottom, rgba(18,1,28,.5), rgba(18,1,28,.95)); }
 .hero-content { position: relative; z-index: 1; text-align: center; padding: 0 1rem; width: 100%; }
@@ -472,123 +472,58 @@ a.proof-card:hover { border-color: var(--accent); background: rgba(58,1,85,.5); 
 
 
 @media (max-width: 768px) { * { animation-duration: 0.1ms !important; transition-duration: 0.3s !important; } }
+a, a:hover { text-decoration: none !important; }
 
-/* Remove ALL underlines */
-a, a:hover, a:visited, a:active,
-.nav-links a, .nav-links a:hover,
-.neon-btn, .neon-btn:hover {
-  text-decoration: none !important;
-}
-
-/* Logo glow */
-#nav-logo-img { 
-  filter: drop-shadow(0 0 8px rgba(181,26,255,0.6)); 
-  transition: filter 0.3s; 
-}
-#nav-logo-img:hover { 
-  filter: drop-shadow(0 0 16px rgba(181,26,255,1)); 
-}
-
-/* CV Buttons inside About */
-.cv-resume-wrap {
-  margin-top: 2rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-}
-
-.cv-resume-label {
-  font-family: var(--f-body);
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: rgba(255,255,255,0.4);
-  margin-bottom: 0.25rem;
-}
-
-.cv-btns-row {
-  display: flex;
-  gap: 1rem;
-  flex-wrap: wrap;
-}
-
-@media (max-width: 768px) { 
-  .cv-btns-row { justify-content: center; } 
-}
-
+.cv-btns-row { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 1.5rem; }
+@media (max-width: 768px) { .cv-btns-row { justify-content: center; } }
 .cv-btn-view {
   display: inline-flex; align-items: center; gap: 0.5rem;
   background: var(--accent); color: #fff !important;
   font-family: var(--f-body); font-size: 12px; font-weight: 600;
   letter-spacing: 0.1em; text-transform: uppercase;
-  padding: 0.75rem 1.75rem; border-radius: 30px;
-  transition: all 0.3s;
-  box-shadow: 0 0 15px rgba(181,26,255,0.4);
-  text-decoration: none !important;
+  padding: 0.7rem 1.5rem; border-radius: 30px;
+  text-decoration: none !important; transition: all .3s;
+  box-shadow: 0 0 15px rgba(181,26,255,.3);
 }
-.cv-btn-view:hover { 
-  background: #9b00e0; 
-  box-shadow: 0 0 30px rgba(181,26,255,0.7); 
-  transform: translateY(-2px); 
-}
-
+.cv-btn-view:hover { opacity: 0.85; transform: translateY(-2px); }
 .cv-btn-download {
   display: inline-flex; align-items: center; gap: 0.5rem;
   background: transparent; color: #fff !important;
   font-family: var(--f-body); font-size: 12px; font-weight: 600;
   letter-spacing: 0.1em; text-transform: uppercase;
-  padding: 0.75rem 1.75rem; border-radius: 30px;
-  border: 1px solid rgba(181,26,255,0.5);
-  transition: all 0.3s;
-  text-decoration: none !important;
+  padding: 0.7rem 1.5rem; border-radius: 30px;
+  border: 1px solid var(--accent);
+  text-decoration: none !important; transition: all .3s;
 }
-.cv-btn-download:hover { 
-  border-color: var(--accent); 
-  background: rgba(181,26,255,0.1); 
-  box-shadow: 0 0 15px rgba(181,26,255,0.3);
-  transform: translateY(-2px); 
-}
-
-/* CV card inside Skill Proof */
+.cv-btn-download:hover { background: var(--accent); transform: translateY(-2px); }
 .cv-proof-card {
-  background: rgba(26,1,40,0.6);
-  border: 1px solid rgba(181,26,255,0.25);
-  border-radius: 16px;
-  padding: 2rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1.5rem;
-  transition: border-color 0.3s, box-shadow 0.3s;
-  flex-wrap: wrap;
+  background: rgba(26,1,40,0.6); border: 1px solid rgba(181,26,255,0.25);
+  border-radius: 16px; padding: 2rem; display: flex;
+  align-items: center; justify-content: space-between;
+  gap: 1.5rem; transition: border-color 0.3s, box-shadow 0.3s; flex-wrap: wrap; margin-top: 2rem;
 }
-.cv-proof-card:hover {
-  border-color: var(--accent);
-  box-shadow: 0 0 20px rgba(181,26,255,0.15);
-}
-.cv-proof-left {
-  display: flex; align-items: center; gap: 1rem;
-}
-.cv-proof-icon {
-  width: 48px; height: 48px;
-  background: rgba(181,26,255,0.15);
-  border-radius: 12px;
-  display: flex; align-items: center; justify-content: center;
-  color: var(--accent);
-}
-.cv-proof-title {
-  font-family: var(--f-body);
-  font-size: 16px; font-weight: 600; color: #fff;
-  margin-bottom: 0.2rem;
-}
-.cv-proof-sub {
-  font-family: var(--f-body);
-  font-size: 12px; color: rgba(255,255,255,0.45);
-  letter-spacing: 0.08em; text-transform: uppercase;
-}
-.cv-proof-btns {
-  display: flex; gap: 0.75rem; flex-wrap: wrap;
+.cv-proof-card:hover { border-color: var(--accent); box-shadow: 0 0 20px rgba(181,26,255,0.15); }
+.cv-proof-left { display: flex; align-items: center; gap: 1rem; }
+.cv-proof-icon { width: 48px; height: 48px; background: rgba(181,26,255,0.15); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: var(--accent); }
+.cv-proof-title { font-family: var(--f-body); font-size: 16px; font-weight: 600; color: #fff; margin: 0 0 0.2rem; }
+.cv-proof-sub { font-family: var(--f-body); font-size: 12px; color: rgba(255,255,255,0.5); margin: 0; }
+.cv-proof-btns { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+
+
+/* Remove ALL underlines */
+a, a:hover, a:visited, a:active { text-decoration: none !important; }
+
+@media (max-width: 768px) {
+  #hero video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+    -webkit-playsinline: true;
+  }
 }
 </style>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
@@ -632,7 +567,7 @@ a, a:hover, a:visited, a:active,
   <!-- â•â•â•â•â•â•â•â•â•â•â• HERO â•â•â•â•â•â•â•â•â•â•â• -->
   <section id="hero">
     <div class="hero-video-wrap">
-      <video autoplay muted loop playsinline style="position:absolute; top:0; left:0; width:100%; height:100%; object-fit:cover; z-index:0;">
+      <video autoplay muted loop playsinline -webkit-playsinline style="position:absolute; top:0; left:0; width:100%; height:100%; object-fit:cover; z-index:0;">
   <source src="assets/videos/hero-reel.mp4" type="video/mp4">
 </video>
 <div style="position:absolute; inset:0; background:rgba(0,0,0,0.4); z-index:0;"></div>
@@ -656,6 +591,16 @@ a, a:hover, a:visited, a:active,
         <h2 class="section-title">About Me<span class="draw-line"></span></h2>
         <!-- EDIT BIO TEXT IN config.js â†’ bio field -->
         <p class="about-bio" id="about-bio">Hi, I'm <strong>Sabbir Adnan</strong>, a Professional Video Editor and Graphic Designer.</p>
+      <div class="cv-btns-row">
+        <a href="assets/images/my-cv.pdf.pdf" target="_blank" rel="noopener" class="cv-btn-view">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+          View CV
+        </a>
+        <a href="assets/images/my-cv.pdf.pdf" download="Sabbir-Adnan-CV.pdf" class="cv-btn-download">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Download CV
+        </a>
+      </div>
       </div>
     </div>
   </section>
@@ -719,16 +664,31 @@ a, a:hover, a:visited, a:active,
     <div class="services-wrapper reveal-up">
       <div class="services-grid services-2-col">
         <div class="service-card">
-          <div class="service-icon">🎬</div>
+          <div class="service-icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#B51AFF" stroke-width="1.5">
+<rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"/>
+<line x1="7" y1="2" x2="7" y2="22"/>
+<line x1="17" y1="2" x2="17" y2="22"/>
+<line x1="2" y1="12" x2="22" y2="12"/>
+<line x1="2" y1="7" x2="7" y2="7"/>
+<line x1="2" y1="17" x2="7" y2="17"/>
+<line x1="17" y1="7" x2="22" y2="7"/>
+<line x1="17" y1="17" x2="22" y2="17"/>
+</svg></div>
           <h3 class="service-name">Video Editing</h3>
-          <p class="service-desc">From raw footage to cinematic sequences â€” motion, storytelling, reels and more.</p>
+          <p class="service-desc">From raw footage to cinematic sequences — motion, storytelling, reels and more.</p>
         </div>
         <div class="service-card">
-          <div class="service-icon">🎨</div>
+          <div class="service-icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#B51AFF" stroke-width="1.5">
+<circle cx="13.5" cy="6.5" r=".5"/>
+<circle cx="17.5" cy="10.5" r=".5"/>
+<circle cx="8.5" cy="7.5" r=".5"/>
+<circle cx="6.5" cy="12.5" r=".5"/>
+<path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/>
+</svg></div>
           <h3 class="service-name">Graphic Design</h3>
           <p class="service-desc">Posters, thumbnails, calligraphy and social media visuals that stand out.</p>
         </div>
-      </div>
+      </div></div>
     </div>
   </section>
 
@@ -742,28 +702,6 @@ a, a:hover, a:visited, a:active,
     </div>
     <!-- Populated by JS from config.skillLinks -->
     <div class="skill-proof-grid reveal-up" id="skill-grid"></div>
-    <!-- CV Card in Skill Proof -->
-    <div class="cv-proof-card reveal-up" style="margin-top: 2rem;">
-      <div class="cv-proof-left">
-        <div class="cv-proof-icon">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
-        </div>
-        <div>
-          <p class="cv-proof-title">Resume / CV</p>
-          <p class="cv-proof-sub">PDF Document</p>
-        </div>
-      </div>
-      <div class="cv-proof-btns">
-        <a href="assets/cv/sabbir-adnan-cv.pdf" target="_blank" rel="noopener" class="cv-btn-view">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-          View
-        </a>
-        <a href="assets/cv/sabbir-adnan-cv.pdf" download="Sabbir-Adnan-CV.pdf" class="cv-btn-download">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-          Download
-        </a>
-      </div>
-    </div>
   </section>
 
   <!-- â•â•â•â•â•â•â•â•â•â•â• CONTACT â•â•â•â•â•â•â•â•â•â•â• -->
@@ -818,35 +756,35 @@ I specialize in creating <strong>Social Media Videos, Reels, Promotional Videos,
     videoProjects: [
         {
             category:  "Motion",
-            thumbnail: "assets/images/proj-1.jpg",
+            thumbnail: "assets/images/thumb-1 (4).jpg",
             url:       "https://youtube.com/playlist?list=PLCbN6Yaq5FOM&si=ezBjiJqeeyTOjyYs",
             title:     "Motion Project Title",
             subtitle:  "Short description here"
         },
         {
             category:  "Storytelling",
-            thumbnail: "assets/images/proj-2.jpg",
+            thumbnail: "assets/images/thumb-1 (1).jpg",
             url:       "https://youtube.com/playlist?list=PLRqr_WiPbrmY&si=3r6ZGQ4enxrU9vvj",
             title:     "Storytelling Project Title",
             subtitle:  "Short description here"
         },
         {
             category:  "Podcast",
-            thumbnail: "assets/images/proj-3.jpg",
+            thumbnail: "assets/images/thumb-1 (3).jpg",
             url:       "https://youtube.com/playlist?list=PLFtPV0z3edUw&si=_y6sKsXPBR0EXm3q",
             title:     "Podcast Project Title",
             subtitle:  "Short description here"
         },
         {
             category:  "Social Content",
-            thumbnail: "assets/images/proj-4.jpg",
+            thumbnail: "assets/images/thumb-1 (7).jpg",
             url:       "https://youtube.com/your-link-here",
             title:     "Social Content Title",
             subtitle:  "Short description here"
         },
         {
             category:  "Reels",
-            thumbnail: "assets/images/proj-5.jpg",
+            thumbnail: "assets/images/thumb-1 (2).jpg",
             url:       "https://youtube.com/playlist?list=PLdmGpNZyw04s&si=qrBJIZtS3I6kOPOQ",
             title:     "Reels Project Title",
             subtitle:  "Short description here"
@@ -858,28 +796,28 @@ I specialize in creating <strong>Social Media Videos, Reels, Promotional Videos,
     designProjects: [
         {
             category:  "Poster",
-            thumbnail: "assets/images/proj-1.jpg",
+            thumbnail: "assets/images/thumbnal-1 (1).jpg",
             url:       "https://www.behance.net/gallery/224277165/Portfolio-part-1",
             title:     "Poster Project Title",
             subtitle:  "Short description here"
         },
         {
             category:  "Calligraphy",
-            thumbnail: "assets/images/proj-2.jpg",
+            thumbnail: "assets/images/thumbnal-1 (3).jpg",
             url:       "https://www.behance.net/gallery/220403237/book-cover-design",
             title:     "Calligraphy Project Title",
             subtitle:  "Short description here"
         },
         {
             category:  "Thumbnail",
-            thumbnail: "assets/images/proj-3.jpg",
+            thumbnail: "assets/images/thumbnal-1 (2).jpg",
             url:       "https://www.behance.net/gallery/254889965/Thumnell-Design",
             title:     "Thumbnail Project Title",
             subtitle:  "Short description here"
         },
         {
             category:  "Social Media",
-            thumbnail: "assets/images/proj-4.jpg",
+            thumbnail: "assets/images/thumbnal-1 (4).jpg",
             url:       "https://www.behance.net/gallery/254106451/Marketing-Ad-Design",
             title:     "Social Media Project Title",
             subtitle:  "Short description here"
